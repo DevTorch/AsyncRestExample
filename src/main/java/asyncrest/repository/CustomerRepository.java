@@ -1,4 +1,9 @@
 package asyncrest.repository;
 
-public interface CustomerRepository extends org.springframework.data.jpa.repository.JpaRepository<asyncrest.persistence.Customer, java.lang.Long> {
-  }
+import asyncrest.persistence.Customer;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface CustomerRepository extends JpaRepository<Customer, Long> {
+}

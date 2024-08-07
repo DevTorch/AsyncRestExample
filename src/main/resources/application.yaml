@@ -1,1 +1,31 @@
-spring.application.name=AsyncRestExample
+server:
+  port: 8080
+
+spring:
+  application:
+    name: AsyncRestExample
+
+  config:
+    import: optional:file:.env[.properties]
+
+  liquibase:
+    enabled: true
+    change-log: classpath:/db/changelog/db.changelog-master.yaml
+
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/${DB_NAME}
+    username: ${DB_USER}
+    password: ${DB_PASSWORD}
+
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        format_sql: true
+        show_sql: true
+        highlight_sql: true
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQLDialect

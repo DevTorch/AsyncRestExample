@@ -1,5 +1,6 @@
-package asyncrest.persistence;
+package asyncrest.persistence.dto;
 
+import asyncrest.persistence.Customer;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -13,10 +14,11 @@ import java.time.LocalDateTime;
 /**
  * DTO for {@link Customer}
  */
-public record CustomerResponseDto(@NotNull @Positive Long id,
-                                  @NotBlank String fullName,
-                                  @Email(message = "Invalid email address") @NotBlank String email,
-                                  String gender,
-                                  @Past @PastOrPresent LocalDateTime created,
-                                  @PastOrPresent LocalDateTime lastUpdated) implements Serializable {
+public record CustomerResponseDto(
+        @NotNull @Positive Long id,
+        @NotBlank String fullName,
+        @Email(message = "Invalid email address") @NotBlank String email,
+        String gender,
+        @Past @PastOrPresent LocalDateTime created,
+        @PastOrPresent LocalDateTime lastUpdated) implements Serializable {
 }
