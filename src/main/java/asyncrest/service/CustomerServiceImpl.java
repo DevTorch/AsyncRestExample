@@ -25,7 +25,7 @@ public class CustomerServiceImpl implements CustomerService {
     private final CustomerRepository customerRepository;
     private final CustomerToDTOMapper customerToDTOMapper;
 
-    @Async
+    @Async("taskExecutor")
     @Override
     @Transactional
     public CompletableFuture<List<CustomerResponseDto>> saveAllFromApi(List<CustomerRequestDto> customers) {
@@ -43,6 +43,7 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
+    @Async("taskExecutor")
     public void deleteMany(List<Long> ids) {
         customerRepository.deleteAllById(ids);
     }
@@ -55,13 +56,14 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     @Transactional
+    @Async("taskExecutor")
     public void deleteAll() {
         customerRepository.deleteAll();
     }
 
-    @Async
     @Override
     @Transactional(readOnly = true)
+    @Async("taskExecutor")
     public CompletableFuture<List<CustomerResponseDto>> findAll() {
         log.info("Find all customers in Future: {}", Thread.currentThread().getName());
         return CompletableFuture.completedFuture(customerToDTOMapper.toResponseDtoList(customerRepository.findAll()));

@@ -19,13 +19,12 @@ spring:
     password: ${DB_PASSWORD}
 
   jpa:
-    show-sql: true
     hibernate:
       ddl-auto: validate
     properties:
       hibernate:
         format_sql: true
-        show_sql: true
+        show_sql: false
         highlight_sql: true
     database: postgresql
     database-platform: org.hibernate.dialect.PostgreSQLDialect
